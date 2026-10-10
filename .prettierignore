@@ -1,0 +1,9 @@
+node_modules
+app/vendor
+app/models
+app/fonts
+test/fixtures
+assets
+docs/accuracy.md
+package-lock.json
+README.md

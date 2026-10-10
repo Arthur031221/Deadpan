@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Deadpan: passport photos that pass</title>
+    <meta
+      name="description"
+      content="Take a passport or visa photo in your browser. A live guide checks head size, centering and expression against the official rules, then lays out six copies on one 4 x 6 print. Nothing is uploaded."
+    />
+    <meta property="og:title" content="Deadpan: passport photos that pass" />
+    <meta
+      property="og:description"
+      content="A live camera guide for passport photos. Runs in your browser, nothing is uploaded."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/Arthur031221/Deadpan/main/assets/social-card.png"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' blob: data:; media-src 'self' blob:; font-src 'self'; connect-src 'self' blob: data:; worker-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="fonts/schibsted-grotesk-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="./" aria-label="Deadpan">
+        <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+          <rect width="32" height="32" rx="9" />
+          <circle cx="11.5" cy="13" r="1.9" />
+          <circle cx="20.5" cy="13" r="1.9" />
+          <rect x="10" y="20.2" width="12" height="2.2" rx="1.1" />
+        </svg>
+        <span class="name">Deadpan</span>
+      </a>
+      <p class="tagline" data-i18n="tagline">Passport photos that pass.</p>
+      <div class="tools">
+        <label class="sr-only" for="lang" data-i18n="language">Language</label>
+        <select id="lang" class="mini"></select>
+        <button id="theme" class="mini icon" type="button" aria-label="Theme"></button>
+      </div>
+    </header>
+
+    <main>
+      <p class="lede" data-i18n="subtitle"></p>
+      <section class="bench">
+        <div class="stage-col">
+          <div class="stage" id="stage" data-state="idle">
+            <canvas id="view" aria-label="Photo preview"></canvas>
+            <div class="placeholder" id="placeholder">
+              <svg viewBox="0 0 200 200" aria-hidden="true">
+                <ellipse cx="100" cy="100" rx="46" ry="60" />
+                <line x1="40" y1="52" x2="160" y2="52" />
+                <line x1="40" y1="148" x2="160" y2="148" />
+              </svg>
+              <p id="startHint" data-i18n="startHint"></p>
+            </div>
+            <div class="hud" id="hud" role="status" aria-live="polite" hidden></div>
+          </div>
+          <div class="controls" id="controls"></div>
+        </div>
+        <aside class="panel">
+          <div class="field">
+            <label for="spec" data-i18n="photoType"></label>
+            <select id="spec"></select>
+          </div>
+          <form class="custom" id="custom" hidden>
+            <label
+              ><span data-i18n="customW"></span><input name="w" type="number" min="15" max="120" step="0.1" value="35"
+            /></label>
+            <label
+              ><span data-i18n="customH"></span><input name="h" type="number" min="15" max="120" step="0.1" value="45"
+            /></label>
+            <label
+              ><span data-i18n="customMin"></span
+              ><input name="min" type="number" min="5" max="100" step="0.1" value="32"
+            /></label>
+            <label
+              ><span data-i18n="customMax"></span
+              ><input name="max" type="number" min="5" max="100" step="0.1" value="36"
+            /></label>
+          </form>
+          <div class="spec-card" id="specCard"></div>
+          <h2 class="rules-title" data-i18n="rules"></h2>
+          <ol class="rules" id="rules"></ol>
+        </aside>
+      </section>
+
+      <section class="result" id="result" hidden>
+        <h2 data-i18n="sheet"></h2>
+        <div class="result-grid">
+          <canvas id="sheetView" aria-label="Print sheet preview"></canvas>
+          <div class="result-side">
+            <p id="sheetNote"></p>
+            <div class="field inline">
+              <label for="paper" data-i18n="paper"></label>
+              <select id="paper"></select>
+            </div>
+            <div class="controls">
+              <button class="primary" id="dlSheet" type="button" data-i18n="downloadSheet"></button>
+              <button class="ghost" id="dlPhoto" type="button" data-i18n="downloadPhoto"></button>
+              <button class="ghost" id="dlDigital" type="button" hidden data-i18n="downloadDigital"></button>
+            </div>
+            <p class="muted" id="digitalNote" hidden></p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p data-i18n="privacy"></p>
+      <p><a href="https://github.com/Arthur031221/Deadpan">GitHub</a> · MIT · MediaPipe, Apache 2.0</p>
+    </footer>
+    <input id="file" type="file" accept="image/*" hidden />
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>

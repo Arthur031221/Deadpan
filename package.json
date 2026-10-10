@@ -1,0 +1,52 @@
+{
+  "name": "deadpan",
+  "version": "0.1.0",
+  "description": "Passport photos that pass. A live camera guide checks head size, centering and expression against the official rules, then lays out a print sheet. Runs in your browser, nothing is uploaded.",
+  "scripts": {
+    "start": "node bin/deadpan.mjs",
+    "test": "node --test test/*.test.js",
+    "test:e2e": "node --test --test-concurrency=1 --test-timeout=240000 test/e2e/*.e2e.js",
+    "fit": "node scripts/fit-metric.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "keywords": [
+    "passport-photo",
+    "id-photo",
+    "visa-photo",
+    "mediapipe",
+    "browser",
+    "privacy",
+    "camera"
+  ],
+  "author": "Arthur031221",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@mediapipe/tasks-vision": "^1.1.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.9"
+  },
+  "bin": {
+    "deadpan": "bin/deadpan.mjs"
+  },
+  "files": [
+    "app",
+    "bin",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arthur031221/Deadpan.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Arthur031221/Deadpan/issues"
+  },
+  "homepage": "https://arthur031221.github.io/Deadpan/",
+  "engines": {
+    "node": ">=20"
+  }
+}

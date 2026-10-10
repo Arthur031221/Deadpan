@@ -1,0 +1,141 @@
+// Interface text. English is the fallback for any key a language lacks.
+const en = {
+  tagline: "Passport photos that pass.",
+  subtitle: "Stand in front of your camera. Each rule turns green as you meet it, then print six on one 4 x 6.",
+  photoType: "Photo type",
+  startCamera: "Start camera",
+  usePhoto: "Use a photo instead",
+  startHint: "Nothing leaves this device. The camera frames stay in your browser.",
+  loading: "Loading the face model",
+  noCamera: "The camera did not open. Allow it in the address bar, or use a photo.",
+  noFace: "No face found. Move into the frame.",
+  manyFaces: "More than one face in view.",
+  holdStill: "Hold still",
+  allGreen: "All rules met",
+  capture: "Take it now",
+  retake: "Retake",
+  autoFit: "Fit the head size",
+  makeSheet: "Make the print sheet",
+  adjustHint: "Drag to move, scroll or pinch to zoom. The numbers follow.",
+  rules: "Rules",
+  spec: "Spec",
+  guide: "Guide",
+  specTip: "Number taken from the official page below",
+  guideTip: "Deadpan's own tolerance on a qualitative rule",
+  needs: "needs",
+  r_head: "Head height, chin to crown",
+  r_centered: "Head centered",
+  r_inFrame: "Whole head in the photo",
+  r_level: "Head level",
+  r_facing: "Facing the camera",
+  r_expression: "Neutral, mouth closed",
+  r_eyes: "Eyes open",
+  r_pixels: "Enough pixels to print",
+  r_background: "Background",
+  unknown: "not measured",
+  pass: "met",
+  fail: "not met",
+  bgLine: "brightness {mean}, spread {spread}",
+  bgNone: "no clear background in view",
+  source: "Source",
+  checked: "checked",
+  sheet: "Print sheet",
+  sheetNote: "{n} photos on {paper}. Print at 100 percent, no fit to page, and measure one with a ruler.",
+  downloadSheet: "Download the sheet",
+  downloadPhoto: "Download one photo",
+  downloadDigital: "Download digital file",
+  digitalNote: "{px} px square, under {kb} KB",
+  paper: "Paper",
+  customSize: "Your own size",
+  customW: "Width mm",
+  customH: "Height mm",
+  customMin: "Head min mm",
+  customMax: "Head max mm",
+  privacy: "No upload, no account, no tracking. Your pictures stay in this tab.",
+  theme: "Theme",
+  language: "Language",
+  imageError: "That file could not be read as a picture.",
+  tooBig: "Could not get the file under the size limit.",
+  headTouches: "The top of the head is cut off or too close to the edge of the picture.",
+};
+
+const zhTW = {
+  tagline: "護照照片，一次過關。",
+  subtitle: "站在鏡頭前，每一項規定符合就變綠，再把六張排在一張 4 x 6 相紙上。",
+  photoType: "照片類型",
+  startCamera: "開啟鏡頭",
+  usePhoto: "改用現有照片",
+  startHint: "不會上傳任何資料，畫面只留在你的瀏覽器。",
+  loading: "正在載入臉部模型",
+  noCamera: "鏡頭無法開啟。請在網址列允許使用，或改用照片。",
+  noFace: "找不到臉，請移到畫面內。",
+  manyFaces: "畫面中有不只一張臉。",
+  holdStill: "請保持不動",
+  allGreen: "全部符合",
+  capture: "現在拍",
+  retake: "重拍",
+  autoFit: "自動調整頭部大小",
+  makeSheet: "排成相紙",
+  adjustHint: "拖曳移動，滾輪或雙指縮放，數字會跟著變。",
+  rules: "規定",
+  spec: "規格",
+  guide: "輔助",
+  specTip: "數字來自下方的官方頁面",
+  guideTip: "Deadpan 對文字規定自訂的容許範圍",
+  needs: "需要",
+  r_head: "頭部高度（下巴到頭頂）",
+  r_centered: "頭部置中",
+  r_inFrame: "整顆頭都在照片內",
+  r_level: "頭部端正",
+  r_facing: "正對鏡頭",
+  r_expression: "表情自然、嘴巴閉合",
+  r_eyes: "雙眼睜開",
+  r_pixels: "解析度足夠列印",
+  r_background: "背景",
+  unknown: "未量到",
+  pass: "符合",
+  fail: "未符合",
+  bgLine: "亮度 {mean}，變化 {spread}",
+  bgNone: "畫面中看不到清楚的背景",
+  source: "出處",
+  checked: "查證日期",
+  sheet: "相紙",
+  sheetNote: "{paper} 上共 {n} 張。列印時選 100%，不要縮放到頁面，並用尺量一張。",
+  downloadSheet: "下載相紙",
+  downloadPhoto: "下載單張照片",
+  downloadDigital: "下載數位檔",
+  digitalNote: "{px} 像素正方形，小於 {kb} KB",
+  paper: "紙張",
+  customSize: "自訂尺寸",
+  customW: "寬 mm",
+  customH: "高 mm",
+  customMin: "頭高下限 mm",
+  customMax: "頭高上限 mm",
+  privacy: "不上傳、不註冊、不追蹤。照片只留在這個分頁。",
+  theme: "主題",
+  language: "語言",
+  imageError: "這個檔案無法讀成圖片。",
+  tooBig: "無法把檔案壓到大小限制以內。",
+  headTouches: "頭頂被切到，或太靠近照片邊緣。",
+};
+
+export const LANGS = { en: { name: "English", text: en }, "zh-TW": { name: "繁體中文", text: zhTW } };
+
+let current = "en";
+
+export function setLang(code) {
+  current = LANGS[code] ? code : "en";
+  document.documentElement.lang = current;
+  localStorage.setItem("deadpan-lang", current);
+}
+
+export function initialLang() {
+  const saved = localStorage.getItem("deadpan-lang");
+  if (saved && LANGS[saved]) return saved;
+  return navigator.language?.toLowerCase().startsWith("zh") ? "zh-TW" : "en";
+}
+
+export function t(key, vars = {}) {
+  const raw = LANGS[current].text[key] ?? en[key] ?? key;
+  return raw.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? "");
+}
