@@ -141,3 +141,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for adding a preset. The models, fonts an
 ## License
 
 MIT. MediaPipe and its models are Apache 2.0.
+
+Assisted by Claude/Codex.
